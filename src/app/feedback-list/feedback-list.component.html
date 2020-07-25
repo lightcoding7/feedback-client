@@ -1,0 +1,165 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 style="text-align: center">Feedbacks</h1><br>
+    <div class="row" [hidden]="!deleteMessage">
+
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <div class="alert alert-info alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Feedback Data Deleted</strong>
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
+
+
+  <div class="panel-body">
+    <table class="table table-hover table-sm" datatable [dtOptions]="dtOptions"
+           [dtTrigger]="dtTrigger">
+      <thead class="thead-light">
+      <tr>
+
+        <!--<th>Id</th>-->
+        <th>Learner Empid</th>
+        <th>Learner Name</th>
+        <th>Course Name</th>
+        <th>is Relevant Content</th>
+        <th>is Relevant Handson</th>
+        <th>Proficiency Level</th>
+        <th>Rating On Content</th>
+        <th>Rating On Handson</th>
+        <th>Comments</th>
+        <th>Action</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let feedback of feedbacks ">
+
+        <!--<td>{{feedback.id}}</td>-->
+        <td>{{feedback.employeeId}}</td>
+        <td>{{feedback.name}}</td>
+        <td>{{feedback.courseName}}</td>
+        <td>{{feedback.isContentRelevant}}</td>
+        <td>{{feedback.contentHandsOn}}</td>
+        <td>{{feedback.proficiencyLevel}}</td>
+        <td>{{feedback.ratingContent}}</td>
+        <td>{{feedback.ratingHandsOn}}</td>
+        <td>{{feedback.comment}}</td>
+
+        <td>
+          <button (click)="deleteFeedback(feedback.id)" class='btn btn-primary'><i class="fa fa-futboll-0">Delete</i>
+          </button>&nbsp;
+          <button (click)="updateFeedback(feedback.id)" class='btn btn-info'
+                  data-toggle="modal" data-target="#myModal">Update
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <br>
+    </table>
+  </div>
+</div>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="feedbackupdateform" #updstu (ngSubmit)="updateStu(updstu)">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" style="text-align: center">Update Feedback</h4>
+
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" *ngFor="let feedback of feedbacklist ">
+          <div [hidden]="isupdated">
+
+            <input type="hidden" class="form-control" formControlName="id" [(ngModel)]="feedback.id">
+
+            <div class="form-group">
+              <label for="name">Learner Empid</label>
+              <input type="text" class="form-control" formControlName="feedback_learnerempid"
+                     [(ngModel)]="feedback.employeeId">
+            </div>
+
+            <div class="form-group">
+              <label for="name">Learner Name</label>
+              <input type="text" class="form-control" formControlName="feedback_learnername"
+                     [(ngModel)]="feedback.name">
+            </div>
+            <div class="form-group">
+              <label for="name">Course Name</label>
+              <input type="text" class="form-control" formControlName="feedback_coursename"
+                     [(ngModel)]="feedback.courseName">
+            </div>
+
+            <div class="form-group">
+              <label for="name">Comments</label>
+              <input type="text" class="form-control" formControlName="feedback_commets"
+                     [(ngModel)]="feedback.comment">
+            </div>
+
+
+            <div class="form-group">
+              <label for="name">is Relevant Content</label>
+              <select class="form-control" formControlName="feedback_isrelevantcontent" required>
+                <option value="YES" [selected]="'YES' == feedback.isContentRelevant">YES</option>
+                <option value="NO" [selected]="'NO' == feedback.isContentRelevant">NO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name">is Relevant Handson</label>
+              <select class="form-control" formControlName="feedback_isrelevanthandson" required>
+                <option value="YES" [selected]="'YES' == feedback.contentHandsOn">YES</option>
+                <option value="NO" [selected]="'NO' == feedback.contentHandsOn">NO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name">Rating On Content</label>
+              <select class="form-control" formControlName="feedback_ratingoncontent" required>
+                <option value="1" [selected]="'1' == feedback.ratingContent">1</option>
+                <option value="2" [selected]="'2' == feedback.ratingContent">2</option>
+                <option value="3" [selected]="'3' == feedback.ratingContent">3</option>
+                <option value="4" [selected]="'4' == feedback.ratingContent">4</option>
+                <option value="5" [selected]="'5' == feedback.ratingContent">5</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="name">Rating On Handson</label>
+              <select class="form-control" formControlName="feedback_ratingonhandson" required>
+                <option value="1" [selected]="'1' == feedback.ratingHandsOn">1</option>
+                <option value="2" [selected]="'2' == feedback.ratingHandsOn">2</option>
+                <option value="3" [selected]="'3' == feedback.ratingHandsOn">3</option>
+                <option value="4" [selected]="'4' == feedback.ratingHandsOn">4</option>
+                <option value="5" [selected]="'5' == feedback.ratingHandsOn">5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name">Proficiency Level</label>
+              <select class="form-control" formControlName="feedback_proficiencylevel" required>
+                <option value="LOW" [selected]="'LOW' == feedback.proficiencyLevel">LOW</option>
+                <option value="MEDIUM" [selected]="'MEDIUM' == feedback.proficiencyLevel">MEDIUM</option>
+                <option value="HIGH" [selected]="'HIGH' == feedback.proficiencyLevel">HIGH</option>
+              </select>
+            </div>
+          </div>
+          <div [hidden]="!isupdated">
+            <h4>Feedback Detail Updated!</h4>
+          </div>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

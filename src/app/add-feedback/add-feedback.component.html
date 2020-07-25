@@ -1,0 +1,136 @@
+<h3>Create Feedback</h3>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4" >
+    <div [hidden]="submitted" style="width: 400px;">
+      <form [formGroup]="feedbacksaveform" #savestudent (ngSubmit)="saveFeedback(saveFeedback)">
+          <div class="form-group">
+              <label for="name">Learner Empid</label>
+              <input type="number" class="form-control"  formControlName="feedback_learnerempid" data-toggle="tooltip"
+                 data-placement="right" title="Enter Learner Emp Id" >
+              <div class="alert alert-danger" *ngIf = "(FeedbackLearnerEmpid.touched) && (FeedbackLearnerEmpid.invalid)"
+                style="margin-top: 5px;">
+                  <span *ngIf="FeedbackLearnerEmpid.errors.required">Learner Employee Id is Required</span>
+                    <span *ngIf = "FeedbackLearnerEmpid.errors.minlength">
+                        MinLength Error
+                    </span>
+                </div>
+          </div>
+
+        <div class="form-group">
+          <label for="name">Learner Name</label>
+          <input type="text" class="form-control"  formControlName="feedback_learnername" data-toggle="tooltip"
+                 data-placement="right" title="Enter Learner Name" >
+          <div class="alert alert-danger" *ngIf = "(FeedbackLearnerName.touched) && (FeedbackLearnerName.invalid)"
+               style="margin-top: 5px;">
+            <span *ngIf="FeedbackLearnerName.errors.required">Learner Name is Required</span>
+            <span *ngIf = "FeedbackLearnerName.errors.minlength">
+                        MinLength Error
+                    </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Course Name</label>
+          <input type="text" class="form-control"  formControlName="feedback_coursename" data-toggle="tooltip"
+                 data-placement="right" title="Course Name" >
+          <div class="alert alert-danger" *ngIf = "(FeedbackCourseName.touched) && (FeedbackCourseName.invalid)"
+               style="margin-top: 5px;">
+            <span *ngIf="FeedbackCourseName.errors.required">Course Name is Required</span>
+            <span *ngIf = "FeedbackCourseName.errors.minlength">
+                        MinLength Error
+                    </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Comments</label>
+          <input type="text" class="form-control"  formControlName="feedback_commets" data-toggle="tooltip"
+                 data-placement="right" title="Comments" >
+          <div class="alert alert-danger" *ngIf = "(FeedbackCommets.touched) && (FeedbackCommets.invalid)"
+               style="margin-top: 5px;">
+            <span *ngIf="FeedbackCommets.errors.required">Comments is Required</span>
+            <span *ngIf = "FeedbackCommets.errors.minlength">
+                        MinLength Error
+                    </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="branch">Rating On Handson</label>
+          <select class="form-control" formControlName="feedback_ratingonhandson" data-toggle="tooltip"
+                  data-placement="right" title="Select Rating On Handson">
+            <option value="null">--Rating On Handson--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="branch">Rating On Content</label>
+          <select class="form-control" formControlName="feedback_ratingoncontent" data-toggle="tooltip"
+                  data-placement="right" title="Select Rating On Handson">
+            <option value="null">--Rating On Content--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="branch">Proficiency Level</label>
+          <select class="form-control" formControlName="feedback_proficiencylevel" data-toggle="tooltip"
+                  data-placement="right" title="Select Proficiency Level">
+            <option value="null">--Proficiency Level--</option>
+            <option value="LOW">LOW</option>
+            <option value="MEDIUM">MEDIUM</option>
+            <option value="HIGH">HIGH</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="branch">is Relevant Content</label>
+          <select class="form-control" formControlName="feedback_isrelevantcontent" data-toggle="tooltip"
+                  data-placement="right" title="Select is Relevant Content">
+            <option value="null">--is Relevant Content--</option>
+            <option value="YES">YES</option>
+            <option value="NO">NO</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="branch">is Relevant Handson</label>
+          <select class="form-control" formControlName="feedback_isrelevanthandson" data-toggle="tooltip"
+                  data-placement="right" title="Select is Relevant Handson">
+            <option value="null">--is Relevant Handson--</option>
+            <option value="YES">YES</option>
+            <option value="NO">NO</option>
+
+          </select>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+  </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+      <div [hidden]="!submitted">
+         <h4>Feedback Added SuccessFully!</h4>
+         <button (click)="addFeedbackForm()" class='btn btn-primary'>Add More Feedback</button>
+      </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+
